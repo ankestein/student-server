@@ -13,7 +13,20 @@ public class StudentRepo {
         return students;
     }
 
+public Student add(Student student){
+        students.add(student);
+        return student;
+}
 
 
+    public Student getById(int id) {
+        for (Student student : students) {
+            if(student.getId() == id){
+                return student;
+            }
+        }
+
+        throw new IllegalArgumentException("Student not found with id " + id);
+    }
 
 }
