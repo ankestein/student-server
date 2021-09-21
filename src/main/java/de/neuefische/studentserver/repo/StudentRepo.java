@@ -4,6 +4,7 @@ import de.neuefische.studentserver.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class StudentRepo {
 
@@ -27,6 +28,25 @@ public Student add(Student student){
         }
 
         throw new IllegalArgumentException("Student not found with id " + id);
+    }
+
+    public void delete(int id) {
+        Student student = getById(id);
+        if (student == null) {
+            return;
+        }
+        students.remove(student);
+    }
+
+    public List<Student> getByName(String search) {
+        List<Student> studentsMatchingName = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getName().equals(search)) {
+                studentsMatchingName.add(student);
+            }
+        }
+        return studentsMatchingName;
+
     }
 
 }
