@@ -20,7 +20,12 @@ public class StudentService {
 
 
     public Student getById(int id) {
-        return studentRepo.getById(id);
+        Optional<Student> student = studentRepo.getById(id);
+        if (student.isPresent()) {
+            return student.get();
+        } else {
+            throw new IllegalArgumentException("ID not found");
+        }
     }
 
     public void deleteStudent(int id) {
