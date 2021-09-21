@@ -4,6 +4,7 @@ import de.neuefische.studentserver.model.Student;
 import de.neuefische.studentserver.repo.StudentRepo;
 
 import java.util.List;
+import java.util.Optional;
 
 public class StudentService {
 
@@ -13,12 +14,20 @@ public class StudentService {
         return studentRepo.list();
     }
 
-public Student add(Student student){
+    public Student add(Student student) {
         return studentRepo.add(student);
-}
+    }
 
 
     public Student getById(int id) {
         return studentRepo.getById(id);
+    }
+
+    public void deleteStudent(int id) {
+        studentRepo.delete(id);
+    }
+
+    public List<Student> getStudentByName(String search) {
+        return studentRepo.getByName(search);
     }
 }
