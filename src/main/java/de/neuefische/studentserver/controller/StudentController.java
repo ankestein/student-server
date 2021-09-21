@@ -26,13 +26,12 @@ public class StudentController {
         return studentService.add(student);
     }
 
-/*
+
     @GetMapping("{id}")
     public Student getStudent(@PathVariable int id) {
         return studentService.getById(id);
     }
 
- */
 
     @GetMapping()
     public List<Student> listStudentByName(@RequestParam Optional<String> search) {
