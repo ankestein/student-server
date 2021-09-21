@@ -2,6 +2,7 @@ package de.neuefische.studentserver.controller;
 
 import de.neuefische.studentserver.model.Student;
 import de.neuefische.studentserver.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,14 +13,12 @@ import java.util.Optional;
 @RequestMapping("student")
 public class StudentController {
 
-    private StudentService studentService = new StudentService();
+    private final StudentService studentService;
 
-    /*
-    @GetMapping
-    public List<Student> getStudents() {
-                return studentService.list();
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
-    */
 
     @PutMapping
     public Student addStudent(@RequestBody Student student){
