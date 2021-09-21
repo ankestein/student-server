@@ -20,10 +20,10 @@ public Student add(Student student){
 }
 
 
-    public Student getById(int id) {
+    public Optional<Student> getById(int id) {
         for (Student student : students) {
             if(student.getId() == id){
-                return student;
+                return Optional.of(student);
             }
         }
 
@@ -31,11 +31,13 @@ public Student add(Student student){
     }
 
     public void delete(int id) {
-        Student student = getById(id);
-        if (student == null) {
-            return;
+        Optional<Student> student = getById(id);
+        if (student.isPresent()) {
+            students.remove(student.get());
+        } else {
+            throw new IllegalArgumentException("ID not found");
         }
-        students.remove(student);
+
     }
 
     public List<Student> getByName(String search) {
