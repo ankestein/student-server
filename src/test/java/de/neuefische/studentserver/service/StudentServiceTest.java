@@ -103,10 +103,23 @@ public class StudentServiceTest {
         verify(studentRepo).getById(id);
     }
 
-
+/*
+to do: continue test
     @Test
-    @DisplayName("getByName should return student with matching name")
+    @DisplayName("getByName should return List of students with matching name")
     public void testGetByName() {
+        StudentRepo studentRepo = mock(StudentRepo.class);
+        when(StudentRepo.getByName()).thenReturn(
+                List.of(
+                        new Student(1, "Lara"),
+                        new Student(2, "Lara")
+                )
+        );
+        StudentService studentService = new StudentService(studentRepo);
+
+
 
     }
+
+ */
 }
