@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,10 +28,10 @@ public class StudentControllerTest {
     private int port;
 
     @Autowired
-    TestRestTemplate restTemplate;
+    private TestRestTemplate restTemplate;
 
     @Autowired
-    StudentRepo studentRepo;
+    private StudentRepo studentRepo;
 
     @BeforeEach
     public void clearRepo() {
@@ -68,26 +71,28 @@ public class StudentControllerTest {
         assertThat(response.getBody(), arrayContainingInAnyOrder(new Student(20, "Sammy")));
     }
 
-    /*
+
     @Test
     public void testAddStudent() {
         // given
-        String url = "http://localhost:" + port + "/student";
+        String url = "http://localhost:" + port + "/student/";
+        Student studentToAdd = new Student(22, "Hannah Miller");
 
         // when
-        ResponseEntity<Student[]> response = restTemplate.put(url, new Student(22, "Hannah Miller"));
+        HttpEntity<Student> entity = new HttpEntity<>(studentToAdd);
+        ResponseEntity<Student> response = restTemplate.exchange(url, HttpMethod.PUT, entity, Student.class);
 
         // then
         assertThat(response.getStatusCode(),is(HttpStatus.OK));
-        assertThat(response.getBody(), arrayContainingInAnyOrder(
-                new Student (22, "Hannah Miller")
-        ));
+        assertThat(response.getBody(), is(studentToAdd));
+        Optional<Student> optionalSavedStudent = studentRepo.getById(22);
+        assertThat(optionalSavedStudent.get(), is(studentToAdd));
     }
 
-     */
 
 
-/*
+
+
     @Test
     public void testDeleteStudent() {
         // given
@@ -99,14 +104,12 @@ public class StudentControllerTest {
         restTemplate.delete(url);
 
         // then
-        assertThat(studentRepo.list(), List.of(new Student(20, "Sammy")));
         assertThat(studentRepo.getById(21), is(Optional.empty()));
-
-
+        assertThat(studentRepo.getById(20), is(Optional.of(new Student(20, "Sammy"))));
     }
 
 
- */
+
 
 
 
