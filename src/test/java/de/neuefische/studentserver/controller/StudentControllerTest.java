@@ -87,7 +87,7 @@ public class StudentControllerTest {
         assertThat(optionalSavedStudent.get(), is(studentToAdd));
     }
 
-
+/*
     @Test
     public void testAddStudentPUT() {
         // given
@@ -104,6 +104,7 @@ public class StudentControllerTest {
         Optional<Student> optionalSavedStudent = studentRepo.getById(22);
         assertThat(optionalSavedStudent.get(), is(studentToAdd));
     }
+ */
 
 
 
