@@ -20,7 +20,14 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    /*
     @PutMapping
+    public Student addStudent(@RequestBody Student student){
+        return studentService.add(student);
+    }
+    */
+
+    @PostMapping
     public Student addStudent(@RequestBody Student student){
         return studentService.add(student);
     }

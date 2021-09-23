@@ -71,9 +71,25 @@ public class StudentControllerTest {
         assertThat(response.getBody(), arrayContainingInAnyOrder(new Student(20, "Sammy")));
     }
 
+    @Test
+    public void testAddStudentPOST() {
+        // given
+        String url = "http://localhost:" + port + "/student/";
+        Student studentToAdd = new Student(22, "Hannah Miller");
+
+        // when
+         ResponseEntity<Student> response = restTemplate.postForEntity(url, studentToAdd, Student.class);
+
+        // then
+        assertThat(response.getStatusCode(),is(HttpStatus.OK));
+        assertThat(response.getBody(), is(studentToAdd));
+        Optional<Student> optionalSavedStudent = studentRepo.getById(22);
+        assertThat(optionalSavedStudent.get(), is(studentToAdd));
+    }
+
 
     @Test
-    public void testAddStudent() {
+    public void testAddStudentPUT() {
         // given
         String url = "http://localhost:" + port + "/student/";
         Student studentToAdd = new Student(22, "Hannah Miller");
