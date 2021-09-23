@@ -53,4 +53,7 @@ public Student add(Student student){
 
     }
 
+    public void clearRepo() {
+        students.clear();
+    }
 }
